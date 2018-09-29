@@ -2,9 +2,9 @@
   "name": "node-helloworld",
   "version": "1.0.0",
   "description": "A simple Hello World App",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node app.js",
     "test": "NODE_ENV=testing mocha 'src/**/*.js' --exit --timeout 10000"
   },
   "keywords": [
