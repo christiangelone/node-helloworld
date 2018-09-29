@@ -1,0 +1,26 @@
+{
+  "name": "node-helloworld",
+  "version": "1.0.0",
+  "description": "A simple Hello World App",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "NODE_ENV=testing mocha 'src/**/*.js' --exit --timeout 10000"
+  },
+  "keywords": [
+    "hello",
+    "world",
+    "node",
+    "helloworld"
+  ],
+  "author": "Christian Angelone",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "mocha": "^5.2.0"
+  }
+}
