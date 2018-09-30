@@ -7,6 +7,6 @@ const apiRoutes = require('./src/api/routes');
 app.use('/api', apiRoutes);
 
 if(process.env.NODE_ENV !== 'testing')
-  app.listen(3333, () => console.log('Hello World listening on port 3333!...'))
+  app.listen(3333, () => console.log('Listening on port 3333...'))
 
 module.exports = app;
