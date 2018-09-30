@@ -4,7 +4,6 @@ pipeline {
     stage('Clone repo'){
       steps {
         checkout scm
-        sh 'git checkout development'
       }
     }
     stage('Build Docker Image'){
