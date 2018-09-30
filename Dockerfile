@@ -1,5 +1,7 @@
 FROM node:8-alpine
 
+LABEL maintainer "christiangelone@gmail.com"
+
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
