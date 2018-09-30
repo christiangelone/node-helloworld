@@ -1,4 +1,4 @@
-node {
+node(label: 'slave') {
   currentBuild.result = "SUCCESS"
   try {
     def app
