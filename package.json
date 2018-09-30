@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "NODE_ENV=testing mocha 'src/**/*.js' --exit --timeout 10000"
+    "test": "NODE_ENV=testing node_modules/.bin/mocha 'src/**/*.js' --exit --timeout 10000"
   },
   "keywords": [
     "hello",
