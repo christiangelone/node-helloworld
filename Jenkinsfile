@@ -29,7 +29,7 @@ pipeline {
   }
   post {
     always {
-      echo 'BUILD FINISHED ¯\_(ツ)_/¯'
+      echo 'BUILD FINISHED ¯|_(ツ)_/¯'
       deleteDir()
     }
     success {
