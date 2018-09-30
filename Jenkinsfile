@@ -8,10 +8,12 @@ node {
     stage('Build Docker Image') {
       app = docker.build('christiangelone/node-helloworld')
     }
-    stage('Test') {
+    stage('Build app & Test') {
       app.inside {
-        sh 'npm install'
-        sh 'npm test'
+        withEnv(['HOME=.', 'npm_config_cache=npm-cache']) {
+          sh 'npm install'
+          sh 'npm test'
+        }
       }
     }
     stage('Publish to Docker Registry') {
