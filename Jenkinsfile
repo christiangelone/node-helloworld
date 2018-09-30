@@ -10,7 +10,7 @@ node {
     }
     stage('Test') {
       app.inside {
-        sh 'npm install -g mocha'
+        sh 'npm install'
         sh 'npm test'
       }
     }
