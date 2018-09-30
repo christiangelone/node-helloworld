@@ -1,21 +1,32 @@
-node {
-  def app
-  stage('Clone repo'){
-    checkout scm
-  }
-  stage('Build Docker Image'){
-    app = docker.build('christiangelone/node-helloworld')          
-  }
-  stage('Test'){
-    app.inside {
-      sh 'npm test'
+pipeline {
+  agent any
+  stages {
+    stage('Clone repo'){
+      steps {
+        checkout scm
+      }
     }
-  }
-  stage('Publish to Docker Registry'){
-    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
-      app.push("${env.BUILD_NUMBER}")
-      app.push('latest')
-    }     
+    stage('Build Docker Image'){
+      steps {
+        app = docker.build('christiangelone/node-helloworld')          
+      }
+    }
+    stage('Test'){
+      steps {
+        app.inside {
+          sh 'cd /usr/src/app'
+          sh 'npm test'
+        }
+      }
+    }
+    stage('Publish to Docker Registry'){
+      steps {
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
+          app.push("${env.BUILD_NUMBER}")
+          app.push('latest')
+        }
+      }
+    }      
   }
   post {
     always {
