@@ -1,4 +1,4 @@
-node(label: 'docker-slave') {
+node {
   currentBuild.result = "SUCCESS"
   try {
     def app
