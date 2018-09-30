@@ -3,7 +3,8 @@ node {
   try {
     def app
     stage('Clone repo') {
-        checkout scm
+      checkout scm
+      sh 'ls -la'
     }
     stage('Build Docker Image') {
       app = docker.build('christiangelone/node-helloworld')
