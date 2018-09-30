@@ -12,7 +12,8 @@ router.use((req,res,next) => {
 router.get('/', (req, res) => {
   res.json({
     version: apiVersion,
-    author: apiAuthor
+    author: apiAuthor,
+    health: 'OK'
   });
 });
 

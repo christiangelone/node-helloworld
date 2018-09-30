@@ -14,6 +14,8 @@ describe('API', () => {
         expect(res).to.be.json;
         expect(res.body).to.ownProperty('version');
         expect(res.body).to.ownProperty('author');
+        expect(res.body).to.ownProperty('health');
+        expect(res.body.health).to.equal('OK');
         done();
       })
     }); 
