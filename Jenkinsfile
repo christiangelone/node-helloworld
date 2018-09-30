@@ -10,7 +10,7 @@ node {
     }
     stage('Test') {
       app.inside {
-        sh 'cd /usr/src/app'
+        sh 'ls -la'
         sh 'npm test'
       }
     }
