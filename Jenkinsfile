@@ -23,16 +23,23 @@ node {
       }  
     }
     stage('Deploy to Elastic Beanstalk') {
-      withCredentials([string(credentialsId: 'aws-account-id', variable: 'id')]) {
+      withCredentials([
+        string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'),
+        string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY'),
+        string(credentialsId: 'aws-account-id', variable: 'AWS_ACCOUNT_ID'),
+        string(credentialsId: 's3-bucket', variable: 'S3_BUCKET')
+      ]) {
         sh 'chmod +x deploy.sh'
-        // usage: ./deploy.sh "aws_access_key_id" \
-        //                  "aws_secret_access_key" \
-        //                  "aws_account_id" \
-        //                  "us-east-1" \
-        //                  "aws-s3-bucket-to-hold-application-versions" \
-        //                  "development-1.0.0" \
-        //                  "node-helloworld"
-        sh "./deploy.sh $id"
+        sh """
+          ./deploy.sh "$AWS_ACCESS_KEY_ID" \
+                      "$AWS_SECRET_ACCESS_KEY" \
+                      "$AWS_ACCOUNT_ID" \
+                      'us-east-1' \
+                      "$S3_BUCKET" \
+                      'development' \
+                      "${env.BUILD_NUMBER}" \
+                      'node-helloworld'
+        """
       }
       echo 'Deployed!'
     }
