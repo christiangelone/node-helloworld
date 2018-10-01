@@ -3,7 +3,7 @@
   "volumes": [],
   "containerDefinitions": [{
     "name": "<NAME>",
-    "image": "<AWS_ACCOUNT_ID>.dkr.ecr.eu-west-1.amazonaws.com/christiangelone/node-helloworld:<VERSION_TAG>",
+    "image": "<AWS_ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/christiangelone/<NAME>:<VERSION_TAG>",
     "essential": true,
     "memoryReservation": 1024,
     "portMappings": [{
@@ -13,7 +13,7 @@
     "links": [],
     "environment": [{
       "name": "NODE_ENV",
-      "value": "development"
+      "value": "<ENV>"
     }],
     "mountPoints": []
   }]

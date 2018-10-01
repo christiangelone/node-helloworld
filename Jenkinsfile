@@ -24,7 +24,15 @@ node {
     }
     stage('Deploy to Elastic Beanstalk') {
       withCredentials([string(credentialsId: 'aws-account-id', variable: 'id')]) {
-        sh "deploy.sh $id"
+        sh 'chmod +x deploy.sh'
+        // usage: ./deploy.sh "aws_access_key_id" \
+        //                  "aws_secret_access_key" \
+        //                  "aws_account_id" \
+        //                  "us-east-1" \
+        //                  "aws-s3-bucket-to-hold-application-versions" \
+        //                  "development-1.0.0" \
+        //                  "node-helloworld"
+        sh "./deploy.sh $id"
       }
       echo 'Deployed!'
     }
