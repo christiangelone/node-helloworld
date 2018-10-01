@@ -7,9 +7,9 @@ node {
     }
     stage('Add AWS account id & Tag version') {
       withCredentials([string(credentialsId: 'aws-account-id', variable: 'id')]) {
-        sh "sed -i 's|<AWS_ACCOUNT_ID>|$id' Dockerrun.aws.json"
+        sh "sed -i 's|<AWS_ACCOUNT_ID>|$id|' Dockerrun.aws.json"
       }
-      sh "sed -i 's|<VERSION_TAG>|latest' Dockerrun.aws.json"
+      sh "sed -i 's|<VERSION_TAG>|latest|' Dockerrun.aws.json"
       sh 'cat Dockerrun.aws.json'
     }    
     stage('Build Docker Image') {
