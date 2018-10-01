@@ -4,14 +4,7 @@ node {
     def app
     stage('Clone repo') {
       checkout scm
-    }
-    stage('Add AWS account id & Tag version') {
-      withCredentials([string(credentialsId: 'aws-account-id', variable: 'id')]) {
-        sh "sed -i 's|<AWS_ACCOUNT_ID>|$id|' Dockerrun.aws.json"
-      }
-      sh "sed -i 's|<VERSION_TAG>|latest|' Dockerrun.aws.json"
-      sh 'cat Dockerrun.aws.json'
-    }    
+    }   
     stage('Build Docker Image') {
       app = docker.build('christiangelone/node-helloworld')
     }
@@ -23,11 +16,17 @@ node {
         }
       }
     }
-    stage('Publish to Docker Registry') {
+    stage('Publish to Docker Registry (ECR)') {
       docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
         app.push("${env.BUILD_NUMBER}")
         app.push('latest')
       }  
+    }
+    stage('Deploy to Elastic Beanstalk') {
+      withCredentials([string(credentialsId: 'aws-account-id', variable: 'id')]) {
+        sh "deploy.sh $id"
+      }
+      echo 'Deployed!'
     }
     stage("Success") {
       echo 'BUILD SUCCEEDED (^‿^)'
