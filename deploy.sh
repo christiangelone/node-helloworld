@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # !Alert: This script should be run by a CI Server (eg: Jenkins), don't run it on your local machine!
-# *Usage: ./deploy.sh "aws_access_key_id" "aws_secret_access_key" "aws_account_id" "us-east-1" "aws-s3-bucket-to-hold-application-versions" "development" "1.0.0" "node-helloworld"
+# *Usage: ./deploy.sh "aws-access-key-id" "aws-secret-access-key" "docker-registry-uri" "us-east-1" "aws-s3-bucket-to-hold-application-versions" "development" "1.0.0" "node-helloworld"
 
 # Checks if parameters are initialized
 if [[ -z $1 || -z $2 || -z $3 || -z $4 || -z $5 || -z $6 || -z $7 || -z $8 ]]; then
@@ -26,7 +26,7 @@ fi
 AWS_ACCESS_KEY_ID=$1
 AWS_SECRET_ACCESS_KEY=$2
 
-AWS_ACCOUNT_ID=$3 # eg: 12345678900
+DOCKER_REGISTRY_URI=$3 # eg: 12345678900
 REGION=$4 # eg: us-east-1
 EB_BUCKET=$5 # eg: aws-s3-bucket-to-hold-application-versions
 
@@ -45,9 +45,8 @@ aws configure set output 'json'
 aws configure set default.region $REGION
 
 #Replace variables in Dockerrun.aws.json
-sed -i "s|<AWS_ACCOUNT_ID>|$AWS_ACCOUNT_ID|" Dockerrun.aws.json
-sed -i "s|<REGION>|$REGION|" Dockerrun.aws.json
-sed -i "s|<ENV>|$VERSION_TAG|" Dockerrun.aws.json
+sed -i "s|<DOCKER_REGISTRY_URI>|$DOCKER_REGISTRY_URI|" Dockerrun.aws.json
+sed -i "s|<ENV>|$ENV|" Dockerrun.aws.json
 sed -i "s|<VERSION_TAG>|$VERSION_TAG|" Dockerrun.aws.json
 sed -i "s|<NAME>|$NAME|g" Dockerrun.aws.json
 

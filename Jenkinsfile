@@ -26,14 +26,14 @@ node {
       withCredentials([
         string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'),
         string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY'),
-        string(credentialsId: 'aws-account-id', variable: 'AWS_ACCOUNT_ID'),
+        string(credentialsId: 'docker-registry-uri', variable: 'DOCKER_REGISTRY_URI'),
         string(credentialsId: 's3-bucket', variable: 'S3_BUCKET')
       ]) {
         sh 'chmod +x deploy.sh'
         sh """
           ./deploy.sh "$AWS_ACCESS_KEY_ID" \
                       "$AWS_SECRET_ACCESS_KEY" \
-                      "$AWS_ACCOUNT_ID" \
+                      "$DOCKER_REGISTRY_URI" \
                       'us-east-1' \
                       "$S3_BUCKET" \
                       'development' \
