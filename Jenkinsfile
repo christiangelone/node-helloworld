@@ -38,10 +38,10 @@ node {
                       "development-${env.BUILD_NUMBER}" \
                       'node-helloworld'
         """
-        slackSend channel: '#jenkins-builds',
-          color: 'good',
-          message: "Pipeline ${currentBuild.fullDisplayName} from branch ${env.BRANCH_NAME}: App has been deployed"
       }
+      slackSend channel: '#jenkins-builds',
+                color: 'good',
+                message: "Pipeline ${currentBuild.fullDisplayName} from branch ${env.BRANCH_NAME}: App has been deployed"
       echo 'Deployed!'
     }
     stage("Success") {
