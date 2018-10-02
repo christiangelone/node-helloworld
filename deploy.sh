@@ -34,7 +34,7 @@ ENV=$6 # eg: development
 VERSION_TAG=$7 # eg: development-1.0.0
 NAME=$8 # eg: node-helloworld
 
-ZIP="$VERSION_TAG.zip" -x \*node_modules\* \*npm-cache\*
+ZIP="$VERSION_TAG.zip"
 
 # Configure AWS cli
 aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
@@ -43,7 +43,7 @@ aws configure set output 'json'
 aws configure set default.region $REGION
 
 # Zip up the project (feel free to zip up an .ebextensions directory with it)
-zip -r $ZIP .
+zip -r $ZIP . -x \*node_modules\* \*npm-cache\*
 # Upload to S3
 aws s3 cp $ZIP "s3://$S3_BUCKET/$ZIP"
 
