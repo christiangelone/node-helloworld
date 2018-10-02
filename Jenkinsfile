@@ -42,7 +42,7 @@ node {
       echo 'BUILD SUCCEEDED (^‿^)'
       slackSend channel: '#jenkins-builds',
                 color: 'good',
-                message: "Pipeline ${currentBuild.fullDisplayName}: Build ${env.BUILD_NUMBER} has completed successfully."      
+                message: "(${currentBuild.duration} ms) Pipeline ${currentBuild.fullDisplayName} from branch has completed successfully."      
     }
   } catch(err) {
     currentBuild.result = "FAILURE"
@@ -51,7 +51,7 @@ node {
       throw err
       slackSend channel: '#jenkins-builds',
                 color: 'danger',
-                message: "Pipeline ${currentBuild.fullDisplayName}: Build ${env.BUILD_NUMBER} has failed"    
+                message: "(${currentBuild.duration} ms) Pipeline ${currentBuild.fullDisplayName} from branch ${env.BRANCH_NAME}: Build has failed"    
     }
   } finally {
     stage('Finished') {
