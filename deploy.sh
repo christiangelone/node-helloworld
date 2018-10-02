@@ -42,12 +42,6 @@ aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
 aws configure set output 'json'
 aws configure set default.region $REGION
 
-#Replace variables in Dockerrun.aws.json
-sed -i "s|<DOCKER_REGISTRY_URI>|$DOCKER_REGISTRY_URI|" Dockerrun.aws.json
-sed -i "s|<ENV>|$ENV|" Dockerrun.aws.json
-sed -i "s|<VERSION_TAG>|$VERSION_TAG|" Dockerrun.aws.json
-sed -i "s|<NAME>|$NAME|g" Dockerrun.aws.json
-
 # Zip up the project (feel free to zip up an .ebextensions directory with it)
 zip -r $ZIP .
 # Upload to S3
