@@ -49,7 +49,7 @@ node {
       slackSend channel: '#jenkins-builds',
                 color: 'good',
                 message: "(${currentBuild.duration} ms) Pipeline ${currentBuild.fullDisplayName} from branch ${env.BRANCH_NAME}: Build has completed successfully"
-    }${env.BRANCH_NAME}
+    }
   } catch(err) {
     currentBuild.result = "FAILURE"
     stage('Failure') {
