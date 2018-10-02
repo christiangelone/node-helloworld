@@ -40,18 +40,18 @@ node {
     }
     stage("Success") {
       echo 'BUILD SUCCEEDED (^‿^)'
-      // slackSend channel: '#jenkins-ci',
-      //           color: 'good',
-      //           message: "Pipeline ${currentBuild.fullDisplayName}: Build ${env.BUILD_NUMBER} has completed successfully."      
+      slackSend channel: '#jenkins-builds',
+                color: 'good',
+                message: "Pipeline ${currentBuild.fullDisplayName}: Build ${env.BUILD_NUMBER} has completed successfully."      
     }
   } catch(err) {
     currentBuild.result = "FAILURE"
     stage('Failure') {
       echo 'BUILD FAILED (╥_╥)'
       throw err
-      // slackSend channel: '#jenkins-ci',
-      //           color: 'fail',
-      //           message: "Pipeline ${currentBuild.fullDisplayName}: Build ${env.BUILD_NUMBER} has failed"    
+      slackSend channel: '#jenkins-builds',
+                color: 'danger',
+                message: "Pipeline ${currentBuild.fullDisplayName}: Build ${env.BUILD_NUMBER} has failed"    
     }
   } finally {
     stage('Finished') {
