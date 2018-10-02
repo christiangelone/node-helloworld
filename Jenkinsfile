@@ -11,6 +11,7 @@ node {
     stage('Build app & Test') {
       app.inside {
         withEnv(['HOME=.', 'npm_config_cache=npm-cache']) {
+          sh 'npm cache clean -f'
           sh 'npm install'
           sh 'npm test'
         }
