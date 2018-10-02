@@ -6,7 +6,7 @@ node {
       checkout scm
     }   
     stage('Build Docker Image') {
-      app = docker.build('christiangelone/node-helloworld')
+      app = docker.build('node-helloworld')
     }
     stage('Build app & Test') {
       app.inside {
@@ -15,12 +15,6 @@ node {
           sh 'npm test'
         }
       }
-    }
-    stage('Publish to Docker Registry (ECR)') {
-      docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
-        app.push("${env.BUILD_NUMBER}")
-        app.push('latest')
-      }  
     }
     stage('Deploy to Elastic Beanstalk') {
       withCredentials([
@@ -37,7 +31,7 @@ node {
                       'us-east-1' \
                       "$S3_BUCKET" \
                       'development' \
-                      "${env.BUILD_NUMBER}" \
+                      "development-${env.BUILD_NUMBER}" \
                       'node-helloworld'
         """
       }

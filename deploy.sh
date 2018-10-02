@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # !Alert: This script should be run by a CI Server (eg: Jenkins), don't run it on your local machine!
-# *Usage: ./deploy.sh "aws-access-key-id" "aws-secret-access-key" "docker-registry-uri" "us-east-1" "aws-s3-bucket-to-hold-application-versions" "development" "1.0.0" "node-helloworld"
+# *Usage: ./deploy.sh "aws-access-key-id" "aws-secret-access-key" "docker-registry-uri" "us-east-1" "aws-s3-bucket-to-hold-application-versions" "development" "development-1.0.0" "node-helloworld"
 
 # Checks if parameters are initialized
 if [[ -z $1 || -z $2 || -z $3 || -z $4 || -z $5 || -z $6 || -z $7 || -z $8 ]]; then
@@ -28,15 +28,13 @@ AWS_SECRET_ACCESS_KEY=$2
 
 DOCKER_REGISTRY_URI=$3 # eg: 12345678900
 REGION=$4 # eg: us-east-1
-EB_BUCKET=$5 # eg: aws-s3-bucket-to-hold-application-versions
+S3_BUCKET=$5 # eg: aws-s3-bucket-to-hold-application-versions
 
 ENV=$6 # eg: development
-VERSION=$7 # eg: 1.0.0
-VERSION_TAG="$ENV-$VERSION" # eg: development-1.0.0
+VERSION_TAG=$7 # eg: development-1.0.0
+NAME=$8 # eg: node-helloworld
 
 ZIP="$VERSION_TAG.zip"
-
-NAME=$8 # eg: node-helloworld
 
 # Configure AWS cli
 aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
@@ -50,14 +48,14 @@ sed -i "s|<ENV>|$ENV|" Dockerrun.aws.json
 sed -i "s|<VERSION_TAG>|$VERSION_TAG|" Dockerrun.aws.json
 sed -i "s|<NAME>|$NAME|g" Dockerrun.aws.json
 
-# Zip up the Dockerrun.aws.json file (feel free to zip up an .ebextensions directory with it)
-zip -r $ZIP Dockerrun.aws.json
-
-aws s3 cp $ZIP "s3://$EB_BUCKET/$ZIP"
+# Zip up the project (feel free to zip up an .ebextensions directory with it)
+zip -r $ZIP .
+# Upload to S3
+aws s3 cp $ZIP "s3://$S3_BUCKET/$ZIP"
 
 # Create a new application version with the zipped up Dockerrun file
 aws elasticbeanstalk create-application-version --application-name "$NAME" \
-    --version-label $VERSION_TAG --source-bundle S3Bucket=$EB_BUCKET,S3Key=$ZIP
+    --version-label $VERSION_TAG --source-bundle S3Bucket=$S3_BUCKET,S3Key=$ZIP
 
 # Update the environment to use the new application version
 aws elasticbeanstalk update-environment --environment-name $NAME \
