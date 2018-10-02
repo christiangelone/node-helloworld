@@ -34,7 +34,7 @@ ENV=$6 # eg: development
 VERSION_TAG=$7 # eg: development-1.0.0
 NAME=$8 # eg: node-helloworld
 
-ZIP="$VERSION_TAG.zip"
+ZIP="$VERSION_TAG.zip" -x \*node_modules\* \*npm-cache\*
 
 # Configure AWS cli
 aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
