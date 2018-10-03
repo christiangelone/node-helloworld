@@ -62,7 +62,7 @@ node {
   } finally {
     stage('Finished') {
       echo 'BUILD FINISHED ¯|_(ツ)_/¯'
-      deleteDir()
+      cleanWs()
     }
   }
 }
