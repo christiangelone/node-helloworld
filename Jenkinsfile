@@ -42,7 +42,7 @@ node {
       slackSend channel: '#jenkins-builds',
                 color: 'good',
                 message: "Pipeline ${currentBuild.fullDisplayName} from branch ${env.BRANCH_NAME}: App has been deployed"
-      echo 'Deployed!'
+      echo 'App deployed!'
     }
     stage("Success") {
       echo 'BUILD SUCCEEDED (^‿^)'
