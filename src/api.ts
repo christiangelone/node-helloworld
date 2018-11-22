@@ -1,6 +1,9 @@
+const dashboard = require('appmetrics-dash');
+
 import express, { Application, ErrorRequestHandler, Request, Response, Router, NextFunction } from 'express';
 import ApiRouter from './api/index';
 import NotImplementedError from './lib/common/errors/not_implemented';
+import { Server } from 'http';
 
 const app: Application = express();
 app.use('/static', express.static('public'))
@@ -28,7 +31,8 @@ const stopped: Function = () => {
 }
 
 if (process.env.NODE_ENV !== 'testing') {
-  app.listen(port, runned())
+  const server: Server = app.listen(port, runned())
+  dashboard.monitor({ server, appmetrics: require('appmetrics')});
   process.on('SIGINT', () => {
     stopped();
     process.exit(0);
