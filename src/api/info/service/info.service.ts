@@ -2,8 +2,7 @@ import { Inject, Injectable } from "@decorators/di";
 import ApiService from "../../../lib/service";
 
 import Info from '../model/info.model';
-import StdLogger  from "../../../lib/loggers/std_logger";
-import { Logger, Levels } from "../../../lib/loggers/logger";
+import { Logger, Levels, StdLogger } from "../../../lib/loggers";
 
 @Injectable()
 export default class InfoService extends ApiService {

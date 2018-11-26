@@ -1,4 +1,4 @@
-import { ApiError, ApiErroraBuilder } from ".";
+import { ApiError, ApiErroraBuilder } from "./errors";
 
 const InternalError: (message: string) => ApiError = 
   message => ApiErroraBuilder(500, {

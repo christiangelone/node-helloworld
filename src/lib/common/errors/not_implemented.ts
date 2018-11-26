@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { ApiError, ApiErroraBuilder } from ".";
+import { ApiError, ApiErroraBuilder } from "./errors";
 
 const NotImplementedError: (req: Request) => ApiError = 
   req => ApiErroraBuilder(501, {

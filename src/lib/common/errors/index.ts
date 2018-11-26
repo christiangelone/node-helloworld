@@ -1,17 +1,11 @@
-class ErrorResponse {
-  constructor(
-    public message: string,
-    public internal_code: string
-  ){}
-};
+import InternalError from "./internal";
+import BadRequestError from "./bad_request";
+import NotFoundError from "./not_found";
+import NotImplementedError from "./not_implemented";
+import UnAuthorizedError from "./unauthorized";
 
-export interface ApiError {
-  statusCode: number;
-  error: ErrorResponse
-};
-
-export const ApiErroraBuilder: (statusCode: number, error: ErrorResponse) => ApiError =
-  (statusCode: number, error: ErrorResponse) => ({
-    statusCode,
-    error
-  });
+export { NotFoundError };
+export { BadRequestError };
+export { UnAuthorizedError };
+export { NotImplementedError };
+export { InternalError };
