@@ -5,7 +5,6 @@ import EnvRouter from './env';
 import DocsRouter from './docs';
 
 const router: Router = Router();
-router.head('/', (req: Request, res: Response) => res.json({ health: 'OK'}));
 router.get('/', (req: Request, res: Response) => res.send(`
   <head>
     <meta charset="utf-8">

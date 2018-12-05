@@ -21,7 +21,7 @@ class HealthDocs extends Docs {
                 properties: {
                   status: {
                     type: 'string',
-                    example: 'OK'
+                    example: 'UP'
                   }
                 }
               }

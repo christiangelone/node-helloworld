@@ -18,7 +18,7 @@ export default class HealthController extends ApiController {
   @Get('/')
   getInfo(@Req() req: Request, @Res() res: Response, @Next() next: NextFunction) {
     return res.json({
-      status: 'OK'
+      status: 'UP'
     });
   }
 }
