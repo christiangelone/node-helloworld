@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import InfoRouter from './info'
 import HealthRouter from './health';
-import InternalError from '../lib/common/errors/internal';
+import DocsRouter from './docs';
 
 const router: Router = Router();
 router.head('/', (req: Request, res: Response) => res.json({ health: 'OK'}));
@@ -24,14 +24,11 @@ router.get('/', (req: Request, res: Response) => res.send(`
   </body>
 `));
 
-router.get('/error', (req: Request, res: Response, next: NextFunction) =>
-  next(InternalError('BOOM!'))
-);
-
 // ========== ADD YOUR ROUTERS HERE ==========
 
   router.use(InfoRouter);
   router.use(HealthRouter);
+  router.use(DocsRouter)
 
 // ========== ADD YOUR ROUTERS HERE ===========
 

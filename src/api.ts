@@ -8,6 +8,7 @@ const app: Application = express();
 app.use('/static', express.static('public'));
 app.use(express.json());
 app.use('/api', ApiRouter);
+if (process.env.NODE_ENV === 'development') app.use('/api/coverage', express.static('coverage'))
 
 app.get('/', (req: Request, res: Response) => res.redirect('/api'));
 app.use((req: Request, res: Response, next: NextFunction) => {
@@ -17,7 +18,7 @@ app.use((apiError: any, req: Request, res: Response, next: NextFunction) => {
   return res.status(apiError.statusCode).send(apiError.error);
 });
 
-const port: Number = parseInt(<any> process.env.PORT) || 3000;
+const port: Number = parseInt(<any> process.env.API_PORT) || 3000;
 
 const runned: Function = () => {
   console.log(`\n[${process.pid}]: 🚀  ${process.env.API_NAME} running on port ${port}...`)

@@ -1,7 +1,7 @@
 export default class Info {
 
-  static VERSION: string = '0.0.0';
-  static AUTHOR: string = 'Christian Angelone';
+  static VERSION: string = process.env.API_VERSION || 'no_version';
+  static AUTHOR: string = process.env.API_AUTHOR || 'anonymous';
 
   private version: string;
   private author: string;

@@ -1,2 +1,13 @@
-# node-helloworld
+# node-helloworld (Bootstrap)
 
+ * Routing via annotations (done)
+ * Folder structure based on domain entities (done)
+ * Testing with Jest (done)
+ * Code coverage & reports (done)
+ * Documentation defined with code integrated with Swagger UI (done)
+ * Debugging integration with Chrome DevTools (done)
+ * Common errors objects and middlewares built in (done)
+ * Injectable dependencies (done)
+ * Jenkins Pipeline defined and deploy to EB script (done)
+ * Extensible logger system with standard implementation (done)
+ * Implementation of API's essential endpoints (done)
