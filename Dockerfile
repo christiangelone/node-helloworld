@@ -1,12 +1,11 @@
 FROM node:8-alpine
-
 LABEL maintainer "christiangelone@gmail.com"
 
-WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install
+ENV NODE_ENV "development"
+WORKDIR /app
 
-COPY . .
+COPY . /app
+RUN npm install
 
 EXPOSE 3333
 CMD [ "npm", "start" ]
