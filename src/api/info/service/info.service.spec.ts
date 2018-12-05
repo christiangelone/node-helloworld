@@ -6,8 +6,8 @@ const expect = chai.expect;
 
 describe('InfoService', () => {
 
-  describe('getInfo',() => {
-    it('Should retrieve the api info', done =>  {
+  describe('getInfo', () => {
+    it('Should retrieve the api info', done => {
       const service: InfoService = Container.get<InfoService>(InfoService);
       const info: Info = service.getInfo();
       expect(info.toJson()).to.eql({
@@ -16,5 +16,6 @@ describe('InfoService', () => {
       });
       done();
     });
-  }); 
+  });
+
 });
