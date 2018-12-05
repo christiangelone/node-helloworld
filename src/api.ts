@@ -1,12 +1,12 @@
 const dashboard = require('appmetrics-dash');
 import express, { Application, ErrorRequestHandler, Request, Response, Router, NextFunction } from 'express';
 import ApiRouter from './api/index';
-import NotImplementedError from './lib/common/errors/not_implemented';
+import { NotImplementedError } from './lib/common/errors';
 import { Server } from 'http';
 
 const app: Application = express();
-app.use('/static', express.static('public'));
 app.use(express.json());
+app.use('/static', express.static('public'));
 app.use('/api', ApiRouter);
 if (process.env.NODE_ENV === 'development') app.use('/api/coverage', express.static('coverage'))
 

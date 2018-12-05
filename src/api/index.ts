@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import InfoRouter from './info'
 import HealthRouter from './health';
+import EnvRouter from './env';
 import DocsRouter from './docs';
 
 const router: Router = Router();
@@ -28,6 +29,7 @@ router.get('/', (req: Request, res: Response) => res.send(`
 
   router.use(InfoRouter);
   router.use(HealthRouter);
+  router.use(EnvRouter);
   router.use(DocsRouter)
 
 // ========== ADD YOUR ROUTERS HERE ===========

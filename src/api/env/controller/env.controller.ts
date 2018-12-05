@@ -4,21 +4,20 @@ import { Request as Req, Response as Res, Next, Controller, Get } from '@decorat
 
 import ApiController from '../../../lib/controller';
 import { Logger, Levels, StdLogger } from "../../../lib/loggers";
+import { AuthMiddleware } from "../../../lib/common/middlewares";
 
-@Controller('/health')
+@Controller('/env', [AuthMiddleware])
 @Injectable()
-export default class HealthController extends ApiController {
+export default class EnvController extends ApiController {
   
   constructor(
     @Inject(StdLogger) private logger: Logger
   ){
-    super('HealthController');
+    super('EnvController');
   }
 
   @Get('/')
-  getInfo(@Req() req: Request, @Res() res: Response, @Next() next: NextFunction) {
-    return res.json({
-      status: 'OK'
-    });
+  getEnv(@Req() req: Request, @Res() res: Response, @Next() next: NextFunction) {
+    return res.json(process.env);
   }
 }

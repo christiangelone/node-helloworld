@@ -1,12 +1,12 @@
 ---
   openapi: "3.0.0"
   info: 
-    title: "App_Dev"
+    title: "no_title"
     description: "no_description"
-    version: "0.0.0"
+    version: "no_version"
   servers: 
     - 
-      url: "http://localhost:3333"
+      url: "http://localhost:3000"
   tags: 
     - 
       name: "info"

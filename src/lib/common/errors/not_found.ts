@@ -1,4 +1,4 @@
-import { ApiError, ApiErroraBuilder } from ".";
+import { ApiError, ApiErroraBuilder } from "./errors";
 
 const NotFoundError: (thing: string) => ApiError = 
   thing => ApiErroraBuilder(404, {
