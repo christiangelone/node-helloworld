@@ -9,7 +9,7 @@ import {
   RedirectsInitializer, 
   ErrorInitializer,
   RunInitializer
-} from './initializers';
+} from './initializers/index';
 
 const apiName = process.env.API_NAME || 'Winkapi';
 console.log(`\n${figlet.textSync(apiName, 'Doom')}\n`);

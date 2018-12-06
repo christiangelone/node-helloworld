@@ -1,9 +1,12 @@
 const dashboard = require('appmetrics-dash');
 import express, { Request, Response, Application } from 'express'
-import { Server } from 'http';
+import fs from 'fs'
+import path from 'path'
+import http, { Server } from 'http';
+import https from 'https';
 
 const runned: Function = () => {
-  console.log(`\n[${process.pid}]: 🚀  ${process.env.API_NAME} running on port ${port}...`)
+  console.log(`\n[${process.pid}]: 🚀  (${process.env.API_PROTOCOL}) ${process.env.API_NAME} running on port ${port}...`)
   console.log(` => Press \`Ctrl + c\` to stop ${process.env.API_NAME}`);
   console.log(`--------------------------------------------------------------------------`);
 }
@@ -12,12 +15,23 @@ const stopped: Function = () => {
   console.log(`\n[${process.pid}]: 💢  ${process.env.API_NAME} has stopped running`)
 }
 
+const createServer = (app, protocol) => {
+  return ({
+    https: https.createServer({
+      key: fs.readFileSync(path.resolve(`src/certificates/${process.env.HTTPS_KEY}`)),
+      cert: fs.readFileSync(path.resolve(`src/certificates/${process.env.HTTPS_CERTIFICATE}`))
+    }, app),
+    http: http.createServer(app)
+  })[protocol]
+}
+
 const port: Number = parseInt(<any> process.env.API_PORT) || 3000;
 
 const RunInitializer: (app: Application) => Application = 
 (app: Application) => {
   if (process.env.NODE_ENV !== 'testing') {
-    const server: Server = app.listen(port, runned())
+    const protocol = process.env.API_PROTOCOL || 'http';
+    const server = createServer(app, protocol).listen(port, runned())
     dashboard.monitor({ server, title: 'API Metrics' });
     process.on('SIGINT', () => {
       stopped();
