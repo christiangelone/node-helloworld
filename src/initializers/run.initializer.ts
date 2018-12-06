@@ -17,7 +17,7 @@ const port: Number = parseInt(<any> process.env.API_PORT) || 3000;
 const RunInitializer: (app: Application) => Application = 
 (app: Application) => {
   if (process.env.NODE_ENV !== 'testing') {
-    const server: Server = app.listen(port, runned)
+    const server: Server = app.listen(port, runned())
     dashboard.monitor({ server, title: 'API Metrics' });
     process.on('SIGINT', () => {
       stopped();
