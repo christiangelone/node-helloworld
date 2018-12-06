@@ -18,8 +18,8 @@ const stopped: Function = () => {
 const createServer = (app, protocol) => {
   return ({
     https: https.createServer({
-      key: fs.readFileSync(path.resolve(`src/certificates/${process.env.HTTPS_KEY}`)),
-      cert: fs.readFileSync(path.resolve(`src/certificates/${process.env.HTTPS_CERTIFICATE}`))
+      key: fs.readFileSync(path.resolve(`certificates/${process.env.HTTPS_KEY}`)),
+      cert: fs.readFileSync(path.resolve(`certificates/${process.env.HTTPS_CERTIFICATE}`))
     }, app),
     http: http.createServer(app)
   })[protocol]
