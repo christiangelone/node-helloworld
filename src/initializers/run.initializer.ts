@@ -15,7 +15,7 @@ const stopped: Function = () => {
   console.log(`\n[${process.pid}]: 💢  ${process.env.API_NAME} has stopped running`)
 }
 
-const createServer = (app, protocol) => {
+const createServer = (app: Application, protocol: string) => {
   return ({
     https: https.createServer({
       key: fs.readFileSync(path.resolve(`certificates/${process.env.HTTPS_KEY}`)),
@@ -31,7 +31,7 @@ const RunInitializer: (app: Application) => Application =
 (app: Application) => {
   if (process.env.NODE_ENV !== 'testing') {
     const protocol = process.env.API_PROTOCOL || 'http';
-    const server = createServer(app, protocol).listen(port, runned())
+    const server: Server = createServer(app, protocol).listen(port, runned())
     dashboard.monitor({ server, title: 'API Metrics' });
     process.on('SIGINT', () => {
       stopped();
