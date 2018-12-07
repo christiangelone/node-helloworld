@@ -13,7 +13,7 @@
  * Extensible logger system with standard implementation &nbsp;(done)
  * Implementation of API's essential endpoints: &nbsp;`GET [/api/health /api/info]`(done)
  * Performance metrics: &nbsp;`/appmetrics-dash` &nbsp;(done)
-`* HTTP/HTTPS support (done)b
+ * HTTP/HTTPS support &nbsp;(done)
 
 ## How to test ?
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
