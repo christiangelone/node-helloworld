@@ -30,7 +30,7 @@
                   properties: 
                     status: 
                       type: "string"
-                      example: "UP"
+                      example: "DOWN"
     /api/info: 
       get: 
         tags: 

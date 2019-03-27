@@ -1,17 +1,20 @@
 import { Injectable } from "@decorators/di";
   
 interface LevelsType {
+  DB: string;
   DEBUG: string;
   INFO: string;
   WARNING: string;
   ERROR: string;
   PRIORITIES: {
+    DB: number;
     DEBUG: number;
     INFO: number;
     WARNING: number;
     ERROR: number;
   };
   COLORS: {
+    DB: string;
     DEBUG: string;
     INFO: string;
     WARNING: string;
@@ -20,17 +23,20 @@ interface LevelsType {
 }
 
 export const Levels: LevelsType = {
+  DB: 'DB',
   DEBUG: 'DEBUG',
   INFO: 'INFO',
   WARNING: 'WARNING',
   ERROR: 'ERROR',
   PRIORITIES: {
+    DB: 4,
     DEBUG: 3,
     INFO: 2,
     WARNING: 1,
     ERROR: 0  
   },
   COLORS: {
+    DB: 'yellow',
     DEBUG: 'cyan',
     INFO: 'green',
     WARNING: 'orange',
