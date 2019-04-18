@@ -1,4 +1,4 @@
 import { Inject } from "@decorators/di";
-export default class ApiModel {
+export default abstract class ApiModel {
   constructor(){}
 };
