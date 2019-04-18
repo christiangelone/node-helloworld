@@ -19,10 +19,11 @@
     "test": "NODE_ENV=testing jest"
   },
   "keywords": [
-    "winkapi",
+    "clapi",
     "api",
     "rest",
-    "server"
+    "http",
+    "https"
   ],
   "author": "Christian Angelone",
   "license": "MIT",
