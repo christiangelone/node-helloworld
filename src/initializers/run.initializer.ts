@@ -4,6 +4,7 @@ import fs from 'fs'
 import path from 'path'
 import http, { Server } from 'http';
 import https from 'https';
+import Initializer from './initializer';
 
 const runned: Function = () => {
   console.log(`\n[${process.pid}]: 🚀  (${process.env.API_PROTOCOL}) ${process.env.API_NAME} running on port ${port}...`)
@@ -27,18 +28,19 @@ const createServer = (app: Application, protocol: string) => {
 
 const port: Number = parseInt(<any> process.env.API_PORT) || 3000;
 
-const RunInitializer: (app: Application) => Application = 
-(app: Application) => {
-  if (process.env.NODE_ENV !== 'testing') {
-    const protocol = process.env.API_PROTOCOL || 'http';
-    const server: Server = createServer(app, protocol).listen(port, runned())
-    dashboard.monitor({ server, title: 'API Metrics' });
-    process.on('SIGINT', () => {
-      stopped();
-      process.exit(0);
-    });
+const RunInitializer: Initializer = new Initializer(
+  (app: Application) => {
+    if (process.env.NODE_ENV !== 'testing') {
+      const protocol = process.env.API_PROTOCOL || 'http';
+      const server: Server = createServer(app, protocol).listen(port, runned())
+      dashboard.monitor({ server, title: 'API Metrics' });
+      process.on('SIGINT', () => {
+        stopped();
+        process.exit(0);
+      });
+    }
+    return app;
   }
-  return app;
-}
+);
 
 export default RunInitializer;

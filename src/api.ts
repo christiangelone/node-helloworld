@@ -10,16 +10,18 @@ import {
   ErrorInitializer,
   RunInitializer
 } from './initializers/index';
+import Initializer from './initializers/initializer';
 
 const apiName = process.env.API_NAME || 'Winkapi';
 console.log(`\n${figlet.textSync(apiName, 'Doom')}\n`);
 
-let app: Application = express().use('/api', ApiRouter);
-app = LimitInitializer(app);
-app = StaticInitializer(app);
-app = CoverageInitializer(app);
-app = RedirectsInitializer(app);
-app = ErrorInitializer(app);
-app = RunInitializer(app);
+const initializer: Initializer =
+  LimitInitializer
+    .and(StaticInitializer)
+    .and(CoverageInitializer)
+    .and(RedirectsInitializer)
+    .and(ErrorInitializer)
+    .and(RunInitializer);
 
-export const Api = app;
+let app: Application = express().use('/api', ApiRouter);
+export const Api: Application = initializer.init(app);
