@@ -6,7 +6,11 @@
     "type": "git",
     "url": "https://github.com/christiangelone/node-helloworld.git"
   },
-  "main": "app.js",
+  "engines": { 
+    "node": "^8 || ^10"
+  },
+  "engineStrict" : true,
+  "main": "api.ts",
   "scripts": {
     "api": "ts-node ./src/api.ts",
     "debug": "node --inspect -r ts-node/register ./src/api.ts",
@@ -19,7 +23,6 @@
     "test": "NODE_ENV=testing jest"
   },
   "keywords": [
-    "clapi",
     "api",
     "rest",
     "http",

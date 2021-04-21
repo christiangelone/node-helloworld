@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { Request as Req, Response as Res, Next, Controller, Get } from '@decorators/express';
 
 import ApiController from '../../../lib/controller';
-import { Logger, Levels, StdLogger } from "../../../lib/loggers";
+import { Logger, StdLogger } from "../../../lib/loggers";
 
 @Controller('/health')
 @Injectable()
@@ -12,7 +12,7 @@ export default class HealthController extends ApiController {
   constructor(
     @Inject(StdLogger) private logger: Logger
   ){
-    super('HealthController');
+    super(logger, 'HealthController');
   }
 
   @Get('/')

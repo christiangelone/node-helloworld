@@ -1,4 +1,3 @@
-import { Server } from 'http';
 import express, { Application } from 'express';
 import figlet from 'figlet';
 import ApiRouter from './api/index';
@@ -12,8 +11,9 @@ import {
 } from './initializers/index';
 import Initializer from './initializers/initializer';
 
-const apiName = process.env.API_NAME || 'Winkapi';
-console.log(`\n${figlet.textSync(apiName, 'Doom')}\n`);
+const apiName = process.env.API_NAME || 'API';
+if(process.env.NODE_ENV !== "testing")
+  console.log(`\n${figlet.textSync(apiName, 'Doom')}\n`);
 
 const initializer: Initializer =
   LimitInitializer

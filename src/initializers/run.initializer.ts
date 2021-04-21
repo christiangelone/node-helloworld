@@ -18,12 +18,12 @@ const stopped: Function = () => {
 
 const createServer = (app: Application, protocol: string) => {
   return ({
-    https: https.createServer({
+    https: () => https.createServer({
       key: fs.readFileSync(path.resolve(`certificates/${process.env.HTTPS_KEY}`)),
       cert: fs.readFileSync(path.resolve(`certificates/${process.env.HTTPS_CERTIFICATE}`))
     }, app),
-    http: http.createServer(app)
-  })[protocol]
+    http: () => http.createServer(app)
+  })[protocol]()
 }
 
 const port: Number = parseInt(<any> process.env.API_PORT) || 3000;

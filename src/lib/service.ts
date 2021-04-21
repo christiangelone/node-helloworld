@@ -1,6 +1,8 @@
+import { Levels, Logger } from "./loggers";
+
 export default abstract class ApiService {
 
-  constructor(protected name: string = 'Service'){ 
-    console.log(`${name} loaded.`); 
+  constructor(logger: Logger, protected name: string = 'Service'){ 
+    logger.log(Levels.INFO, `${name} loaded.`); 
   }
 }

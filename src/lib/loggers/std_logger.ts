@@ -21,7 +21,7 @@ export default class StdLogger extends Logger {
       ),
       transports: [
         new winston.transports.Console(),
-        new winston.transports.File({ filename: `clapi.log` })
+        new winston.transports.File({ filename: `logfile.log` })
       ]
     }
   };

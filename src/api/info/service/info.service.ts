@@ -10,7 +10,7 @@ export default class InfoService extends ApiService {
   constructor(
     @Inject(StdLogger) private logger: Logger
   ){
-    super('InfoService');
+    super(logger, 'InfoService');
   }
 
   getInfo(): Info {

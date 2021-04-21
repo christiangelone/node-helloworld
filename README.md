@@ -1,4 +1,17 @@
-# node-helloworld (Bootstrap)
+<div style="background: #1E1E1E;
+  border-radius: 5px;
+  margin-top: 25px;
+  margin-bottom: 40px;
+  padding: 10px 8px 4px 10px;
+  border: white 5px outset;
+  box-shadow: 2px 2px 2px grey,
+    2px 2px 17px grey,
+    2px 2px 17px grey, 
+    2px 2px 17px grey;">
+  <img style="margin-right:2px;margin-left:2px;border:#4278C0 5px solid;border-radius: 5px;background: #4278c0;" src="https://img.shields.io/badge/-^3.1.6-white?style=flat&logo=typescript"/>
+</div>
+
+# NodeTS base
 
 ## Covered so far
  * Routing via annotations &nbsp;(done)
@@ -42,4 +55,3 @@
   $&nbsp;``` npm run debug prod ```
 
   * Then open your Node dev tools in chrome, to start debugging.
-

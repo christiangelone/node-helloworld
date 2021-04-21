@@ -33,7 +33,7 @@ export const Levels: LevelsType = {
     DEBUG: 3,
     INFO: 2,
     WARNING: 1,
-    ERROR: 0  
+    ERROR: 0
   },
   COLORS: {
     DB: 'yellow',
@@ -47,7 +47,9 @@ export const Levels: LevelsType = {
 @Injectable()
 export class EnvLevels {
   getValue(): string[] {
-    return process.env.LOGGING_LEVELS ? process.env.LOGGING_LEVELS.split(',') : [Levels.DEBUG];
+    return process.env.LOGGING_LEVELS
+      ? process.env.LOGGING_LEVELS.split(',').map(l => l.toUpperCase())
+      : [Levels.DEBUG];
   }
 };
 

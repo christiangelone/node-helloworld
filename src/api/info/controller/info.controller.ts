@@ -4,7 +4,7 @@ import { Request as Req, Response as Res, Next, Controller, Get } from '@decorat
 
 import ApiController from '../../../lib/controller';
 import InfoService from "../service/info.service";
-import { Logger, Levels, StdLogger } from "../../../lib/loggers";
+import { Logger, StdLogger } from "../../../lib/loggers";
 
 @Controller('/info')
 @Injectable()
@@ -14,7 +14,7 @@ export default class InfoController extends ApiController {
     @Inject(StdLogger) private logger: Logger,
     @Inject(InfoService) private service: InfoService
   ){
-    super('InfoController');
+    super(logger, 'InfoController');
   }
 
   @Get('/')

@@ -2,7 +2,6 @@ import Docs from "../../../lib/docs";
 
 class HealthDocs extends Docs {
 
-  
   constructor(){
     super()
   }
